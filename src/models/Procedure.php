@@ -20,7 +20,6 @@ abstract class Procedure extends Model implements ProcedureInterface
     const EVENT_AFTER_CALL = 'afterCall';
 
     const SCENARIO_CALL = 'procedureCall';
-    const SCENARIO_COUNT = 'procedureCount';
 
     /**
      * @var Connection
@@ -108,20 +107,48 @@ abstract class Procedure extends Model implements ProcedureInterface
     }
 
     /**
-     * @param  string $method
-     * @param  array $params
+     * @return string Template for command (can containt {procedure} var)
+     */
+    protected function getCommandTemplate(): string
+    {
+        return 'SET NOCOUNT ON; EXECUTE [dbo].[{procedure}]';
+    }
+
+    /** Get command by template
+     * @param array $params Params to command
+     * @return string Final command
+     */
+    private function getCommand(array $params): string
+    {
+        $cmd = $this->getCommandTemplate();
+        $placeholders = [];
+        foreach ($params as $name => $value) {
+            $placeholders['{' . $name . '}'] = $value;
+        }
+        return ($placeholders === []) ? $cmd : strtr($cmd, $placeholders);
+    }
+
+    /**
+     * @param string $procName
+     * @param string $method
+     * @param array $params
      * @return mixed
      */
-    protected function executeInternal($procName, string $method, array $params = [])
+    protected function executeInternal(string $procName, string $method, array $params = [])
     {
-        $command = $this->getDb()->createCommand('SET NOCOUNT ON; EXECUTE [dbo].[' . $procName . '] ' . $this->buildInputParams($params));
+        $cmd = $this->getCommand(['procedure' => $procName]) . ' ' . $this->buildInputParams($params);
+        Yii::trace($cmd, __METHOD__);
+
+        $command = $this->getDb()->createCommand($cmd);
 
         // bind params
         foreach ($params as $attr => $value) {
             $command->bindValue(':' . $attr, $value);
         }
+        $result = call_user_func([$command, $method]);
 
-        return call_user_func([$command, $method]);
+        Yii::trace(print_r($result, true), __METHOD__);
+        return $result;
     }
 
     /**
