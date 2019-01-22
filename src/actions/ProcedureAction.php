@@ -22,7 +22,7 @@ abstract class ProcedureAction extends Action
     public $procedureClass;
 
     /**
-     * String representing resource class name.
+     * String representing resource class name. Must be instance of damidev\\dbprocedures\\models\\Resource
      *
      * @var string
      */

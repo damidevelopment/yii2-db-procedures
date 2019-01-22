@@ -7,7 +7,7 @@
 namespace damidev\dbprocedures\actions;
 
 
-use damidev\dbprocedures\models\ProcedureInterface;
+use damidev\dbprocedures\models\Resource;
 use yii\base\Model;
 use yii\web\NotFoundHttpException;
 
@@ -16,7 +16,7 @@ class SimpleProcedureAction extends ProcedureAction
     /**
      * @inheritdoc
      *
-     * @return ProcedureInterface|array
+     * @return Resource
      */
     public function run()
     {
@@ -37,12 +37,13 @@ class SimpleProcedureAction extends ProcedureAction
 
     /**
      * @param array $data
+     * @return Resource
      */
-    protected function createResource($data)
+    protected function createResource(array $data): Resource
     {
         $resource = new $this->resourceClass;
-        if (!($resource instanceof Model)) {
-            throw new \InvalidArgumentException('Resource must be instance of yii\\base\\Model.');
+        if (!($resource instanceof Resource)) {
+            throw new \InvalidArgumentException('Resource must be instance of damidev\\dbprocedures\\models\\Resource.');
         }
         $resource->load($data, '');
         return $resource;
