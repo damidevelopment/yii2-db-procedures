@@ -10,8 +10,9 @@ use Yii;
 use yii\db\Exception as DbException;
 
 
-abstract class PaginatedProcedure extends Procedure
+abstract class PaginatedProcedure extends MultiProcedure
 {
+
     /**
      * @var integer
      */
@@ -28,26 +29,24 @@ abstract class PaginatedProcedure extends Procedure
     public $offset = 0;
 
     /**
-     * @var array Filter after call
+     * @var bool If is pagination in API or procedures support pagination
      */
-    public $filter = [];
-
-    /**
-     * @var array Data from procedure
-     */
-    private $_data;
+    public $manualPagination = true;
 
     /**
      * @inheritdoc
      */
     public function rules()
     {
-        return [
+        $rules = [
             [['page'], 'integer', 'min' => 1, 'on' => self::SCENARIO_DEFAULT],
             // fix integer values
             [['page', 'limit', 'offset'], 'integerFix', 'on' => self::SCENARIO_DEFAULT],
-            //     [['limit', 'offset'], 'safe', 'on' => self::SCENARIO_CALL],
         ];
+        if (!$this->manualPagination) {
+            $rules[] = [['limit', 'offset'], 'safe', 'on' => self::SCENARIO_CALL];
+        }
+        return $rules;
     }
 
     /**
@@ -61,50 +60,14 @@ abstract class PaginatedProcedure extends Procedure
     }
 
     /**
-     * @return array Data from procedure
-     */
-    protected function getAllData()
-    {
-        if ($this->_data === null) {
-            $this->_data = $this->execute('queryAll');
-            if ($this->filter) {
-                $this->_data = $this->applyFilter($this->_data);
-            }
-        }
-        return $this->_data;
-    }
-
-    /** Apply filter after call
-     * @param array $data
-     * @return array
-     */
-    private function applyFilter(array $data): array
-    {
-        $data = array_filter($data, function ($item) {
-            foreach ($this->filter as $key => $value) {
-                if($item[$key] != $value){
-                    return false;
-                }
-            }
-            return true;
-        });
-        return $data;
-    }
-
-    /**
      * @inheritdoc
      */
     public function call()
     {
-        return array_slice($this->getAllData(), $this->offset, $this->limit);
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function callCount(): int
-    {
-        return count($this->getAllData());
+        if ($this->manualPagination) {
+            return array_slice($this->getAllData(), $this->offset, $this->limit);
+        }
+        return $this->getAllData();
     }
 
 }
