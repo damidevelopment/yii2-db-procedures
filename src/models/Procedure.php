@@ -2,7 +2,7 @@
 
 namespace damidev\dbprocedures\models;
 
-use app\models\events\AfterCallEvent;
+use damidev\dbprocedures\models\events\AfterCallEvent;
 use Yii;
 use yii\base\Model;
 use yii\base\ModelEvent;

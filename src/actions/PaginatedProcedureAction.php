@@ -2,9 +2,8 @@
 
 namespace damidev\dbprocedures\actions;
 
-use app\models\PaginatedProcedure;
-use app\models\Procedure;
-use app\models\ProcedureDataProvider;
+use damidev\dbprocedures\models\PaginatedProcedure;
+use damidev\dbprocedures\models\ProcedureDataProvider;
 use Yii;
 
 

@@ -7,7 +7,6 @@
 namespace damidev\dbprocedures\models;
 
 use Yii;
-use yii\db\Exception as DbException;
 
 
 abstract class PaginatedProcedure extends MultiProcedure

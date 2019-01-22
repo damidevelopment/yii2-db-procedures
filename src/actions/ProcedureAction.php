@@ -7,7 +7,7 @@
 namespace damidev\dbprocedures\actions;
 
 
-use app\models\ProcedureInterface;
+use damidev\dbprocedures\models\ProcedureInterface;
 use Yii;
 use yii\base\Action;
 
