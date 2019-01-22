@@ -51,8 +51,9 @@ abstract class Procedure extends Model implements ProcedureInterface
 
     /**
      * Get procedure name
+     * @return string Name of procedure
      */
-    public static function procedureName()
+    public static function procedureName(): string
     {
         return StringHelper::basename(get_called_class());
     }
@@ -64,7 +65,7 @@ abstract class Procedure extends Model implements ProcedureInterface
      */
     protected function beforeCall(): bool
     {
-        $event = new ModelEvent;
+        $event = new ModelEvent();
         $this->trigger(self::EVENT_BEFORE_CALL, $event);
 
         return $event->isValid;
@@ -77,7 +78,7 @@ abstract class Procedure extends Model implements ProcedureInterface
      */
     protected function afterCall($result)
     {
-        $event = new AfterCallEvent;
+        $event = new AfterCallEvent();
         $event->result = $result;
         $this->trigger(self::EVENT_AFTER_CALL, $event);
         return $event->result;
