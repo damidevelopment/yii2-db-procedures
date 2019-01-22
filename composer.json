@@ -27,7 +27,7 @@
   "minimum-stability": "stable",
   "autoload": {
     "psr-4": {
-      "damidev\\yii2-db-procedures\\": ""
+      "damidev\\db-procedures\\": ""
     }
   }
 }
