@@ -1,0 +1,33 @@
+{
+  "name": "damidev/yii2-db-procedures",
+  "type": "yii2-extension",
+
+  "description": "Extension containing models for work with procedures/views in database",
+  "keywords": ["yii2", "db", "procedure"],
+  "license": "MIT",
+  "support": {
+    "issues": "https://gogs.damidev.com/dami-libraries/yii2-db-procedures/issues",
+    "source": "https://gogs.damidev.com/dami-libraries/yii2-db-procedures"
+  },
+  "authors": [
+    {
+      "name": "Martin Štěpánek",
+      "email": "stepanek@damidev.com"
+    },
+    {
+      "name": "Jakub Hrášek",
+      "email": "hrasek@damidev.com"
+    }
+  ],
+
+  "require": {
+    "yiisoft/yii2": "~2.0.0",
+    "php": ">=7.2"
+  },
+  "minimum-stability": "stable",
+  "autoload": {
+    "psr-4": {
+      "damidev\\yii2-db-procedures\\": ""
+    }
+  }
+}
