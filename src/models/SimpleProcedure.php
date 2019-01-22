@@ -12,7 +12,7 @@ class SimpleProcedure extends Procedure
     /**
      * @var mixed
      */
-    private $_result;
+    private $_data;
 
 
     /**
@@ -20,9 +20,9 @@ class SimpleProcedure extends Procedure
      */
     public function call()
     {
-        if ($this->_result === null) {
-            $this->_result = $this->execute('queryOne');
+        if ($this->_data === null) {
+            $this->_data = $this->execute('queryOne');
         }
-        return $this->_result;
+        return $this->_data;
     }
 }
