@@ -99,4 +99,12 @@ class MultiProcedure extends Procedure
         return count($this->getAllData());
     }
 
+
+    /**
+     * Refresh procedure data
+     */
+    public function refresh(): void
+    {
+        $this->_data = null;
+    }
 }

@@ -25,4 +25,12 @@ class SimpleProcedure extends Procedure
         }
         return $this->_data;
     }
+
+    /**
+     * Refresh procedure data
+     */
+    public function refresh(): void
+    {
+        $this->_data = null;
+    }
 }
