@@ -8,6 +8,9 @@ use Yii;
 
 
 /**
+ * Paginated procedure action provides easy way to call procedure with input (GET or POST)
+ * and return ProcedureDataProvider containing data from procedure.
+ *
  * @Author: Jakub Hrášek
  * @Date:   2018-07-02 07:41:30
  */
@@ -15,12 +18,14 @@ class PaginatedProcedureAction extends ProcedureAction
 {
 
     /**
-     * @var array|callable Filter that is applied after call
+     * @var array|callable Filter that is applied after call.
+     * The anonymous function signature should be: `function(array $input): array`.
      */
     public $filter = [];
 
     /**
-     * @var PaginatedProcedure
+     * @var PaginatedProcedure Paginated procedure that will be called.
+     * Procedure must implement app\\models\\PaginatedProcedure
      */
     protected $procedure;
 
@@ -40,6 +45,8 @@ class PaginatedProcedureAction extends ProcedureAction
      * @inheritdoc
      *
      * @return PaginatedProcedure|ProcedureDataProvider
+     * In case of error, is returned procedure with errors,
+     * otherwise is returned ProcedureDataProvider containing data
      */
     public function run()
     {
