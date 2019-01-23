@@ -8,9 +8,11 @@ use Yii;
 
 
 /**
- * Paginated procedure action provides easy way to call procedure with input (GET or POST)
+ * PaginatedProcedureAction provides easy way to call procedure with input (GET or POST)
  * and return ProcedureDataProvider containing data from procedure.
  *
+ * Class PaginatedProcedureAction
+ * @package damidev\dbprocedures\actions
  * @Author: Jakub Hrášek
  * @Date:   2018-07-02 07:41:30
  */
