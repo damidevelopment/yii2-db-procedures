@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stepanek
- * Date: 1/23/19
- * Time: 10:50 AM
- */
 
 namespace damidev\dbprocedures\models\executors;
 
@@ -13,16 +7,22 @@ use yii\db\Connection;
 use damidev\dbprocedures\models\database\IDatabaseAccessable;
 use damidev\dbprocedures\models\database\TDatabaseAccess;
 
-
+/**
+ * Class ProcedureExecutor
+ * @author Martin Štěpánek
+ * @date 1/23/19 10:50 PM
+ * @package damidev\dbprocedures\models\executors
+ */
 class ProcedureExecutor extends Model implements IExecutor, IDatabaseAccessable
 {
     use TDatabaseAccess;
 
     /**
-     * @param string $cmd
-     * @param array $params
-     * @param string $method
-     * @return mixed
+     * Execute command on configured database
+     * @param string $cmd Command to execute
+     * @param array $params Params to command
+     * @param string $method Method that should be executed on command (queryOne, queryAll, etc.)
+     * @return mixed Data payload
      */
     public function execute(string $cmd, array $params, string $method)
     {
