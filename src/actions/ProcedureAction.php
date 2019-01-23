@@ -1,8 +1,4 @@
 <?php
-/**
- * @Author: Martin Štěpánek
- * @Date: 03/07/2018 12:56
- */
 
 namespace damidev\dbprocedures\actions;
 
@@ -11,6 +7,14 @@ use damidev\dbprocedures\models\IProcedure;
 use Yii;
 use yii\base\Action;
 
+/**
+ * ProcedureAction is base abstract class for every procedure action providing easy configuration.
+ *
+ * Class ProcedureAction
+ * @package damidev\dbprocedures\actions
+ * @Author: Martin Štěpánek
+ * @Date: 03/07/2018 12:56
+ */
 abstract class ProcedureAction extends Action
 {
 
@@ -29,14 +33,16 @@ abstract class ProcedureAction extends Action
     public $resourceClass;
 
     /**
-     * Callable object. Must return array. These data will be used to load input parameters for procedure.
+     * Callable object.
+     * The anonymous function signature should be: `function(): array`.
+     * These data will be used to load input parameters for procedure.
      *
-     * @var array|Closure
+     * @var array|\Closure
      */
     public $input;
 
     /**
-     * @var IProcedure
+     * @var IProcedure Instance of IProcedure created base on ProcedureAction::procedureClass
      */
     protected $procedure;
 
@@ -52,12 +58,15 @@ abstract class ProcedureAction extends Action
         $this->procedure = new $class;
 
         if (!$this->procedure instanceof IProcedure) {
-            throw new \InvalidArgumentException('Procedure must implement app\\models\\ProcedureInterface');
+            throw new \InvalidArgumentException('Procedure must implement app\\models\\IProcedure');
         }
     }
 
     /**
-     * @return array
+     * Returns input for procedure.
+     * If is input configured (array or closure) returns this configuration,
+     * otherwise returns input based on request method (GET or POST).
+     * @return array Input for procedure
      */
     protected function getInput(): array
     {
