@@ -1,22 +1,22 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: stepanek
- * Date: 1/23/19
- * Time: 10:51 AM
- */
 
 namespace damidev\dbprocedures\models\executors;
 
-
+/**
+ * Interface IExecutor
+ * @author Martin Štěpánek
+ * @date 1/23/19 10:51 AM
+ * @package damidev\dbprocedures\models\executors
+ */
 interface IExecutor
 {
 
     /**
-     * @param string $cmd
-     * @param array $params
-     * @param string $method
-     * @return mixed
+     * Execute command
+     * @param string $cmd Command to execute
+     * @param array $params Params to command
+     * @param string $method Method that should be executed on command (queryOne, queryAll, etc.)
+     * @return mixed Data payload
      */
     public function execute(string $cmd, array $params, string $method);
 
