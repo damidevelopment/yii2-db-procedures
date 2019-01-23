@@ -15,25 +15,38 @@ use yii\helpers\StringHelper;
 
 
 /**
- * @Author: Jakub Hrášek
- * @Date:   2018-06-13 18:02:19
+ * Class Procedure
+ * @author Jakub Hrášek
+ * @date 2018-06-13 18:02:19
+ * @package damidev\dbprocedures\models
  */
 abstract class Procedure extends Model implements IProcedure, IDatabaseAccessable
 {
     use TDatabaseAccess;
 
+    /**
+     * @event Event an event that is triggered before Procedure::call()
+     */
     const EVENT_BEFORE_CALL = 'beforeCall';
+
+    /**
+     * @event Event an event that is triggered after Procedure::call()
+     */
     const EVENT_AFTER_CALL = 'afterCall';
 
+    /**
+     * Scenario that is set up when Procedure::call()
+     */
     const SCENARIO_CALL = 'procedureCall';
 
     /**
-     * @var IExecutor
+     * @var IExecutor Executor that execute command on Procedure::call()
      */
     private $_executor;
 
     /**
-     * @param IExecutor $executor
+     * Sets Executor
+     * @param IExecutor $executor Executor that execute command on Procedure::call()
      * @return Procedure
      */
     public function setExecutor(IExecutor $executor): self
@@ -43,7 +56,8 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
     }
 
     /**
-     * @return IExecutor
+     * Returns executor
+     * @return IExecutor Executor that execute command on Procedure::call()
      */
     public function getExecutor(): IExecutor
     {
@@ -79,7 +93,7 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
     }
 
     /**
-     * Event
+     * Event after procedure call
      *
      * @return mixed
      */
@@ -92,7 +106,9 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
     }
 
     /**
-     * @param  string query method name, possible values are queryOne, queryAll
+     * Sets scenario, call events and Procedure::executeInternal()
+     *
+     * @param string $method Method that should be executed on command (queryOne, queryAll, etc.)
      * @return false|mixed
      */
     protected function execute(string $method)
@@ -115,14 +131,16 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
     }
 
     /**
-     * @return string Template for command (can containt {procedure} var)
+     * @return string Template for command (can contain {procedure} var)
      */
     protected function getCommandTemplate(): string
     {
         return 'SET NOCOUNT ON; EXECUTE [dbo].[{procedure}]';
     }
 
-    /** Get command by template
+    /**
+     * Get command based on template
+     * @see Procedure::getCommandTemplate()
      * @param array $params Params to command
      * @return string Final command
      */
@@ -137,10 +155,13 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
     }
 
     /**
-     * @param string $procName
-     * @param string $method
-     * @param array $params
-     * @return mixed
+     * Creates command and executes that command on Procedure::executor.
+     * Logs process to Yii debugger.
+     *
+     * @param string $procName Procedure name
+     * @param string $method Method that should be executed on command (queryOne, queryAll, etc.)
+     * @param array $params Params for procedure
+     * @return mixed Data payload
      */
     protected function executeInternal(string $procName, string $method, array $params = [])
     {
@@ -154,8 +175,9 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
     }
 
     /**
-     * @param  array
-     * @return string
+     * Builds SQL params for procedure
+     * @param array $params Params for procedure
+     * @return string SQL params
      */
     protected function buildInputParams(array $params): string
     {
