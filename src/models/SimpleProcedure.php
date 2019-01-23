@@ -1,16 +1,17 @@
 <?php
-/**
- * @Author: Martin Štěpánek
- * @Date: 03/07/2018 13:13
- */
 
 namespace damidev\dbprocedures\models;
 
-
+/**
+ * Class SimpleProcedure
+ * @author Martin Štěpánek
+ * @date 7/3/18 13:13 PM
+ * @package damidev\dbprocedures\models
+ */
 class SimpleProcedure extends Procedure
 {
     /**
-     * @var mixed
+     * @var mixed Data payload from procedure
      */
     private $_data;
 
@@ -27,7 +28,7 @@ class SimpleProcedure extends Procedure
     }
 
     /**
-     * Refresh procedure data
+     * Refreshes procedure data
      */
     public function refresh(): void
     {
