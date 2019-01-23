@@ -1,34 +1,35 @@
 <?php
-/**
- * @Author: Martin Štěpánek
- * @Date: 03/07/2018 10:06
- */
 
 namespace damidev\dbprocedures\models;
 
 use Yii;
 
-
+/**
+ * Class PaginatedProcedure
+ * @author Martin Štěpánek
+ * @date 7/3/18 10:06 PM
+ * @package damidev\dbprocedures\models
+ */
 abstract class PaginatedProcedure extends MultiProcedure
 {
 
     /**
-     * @var integer
+     * @var integer Number of page
      */
     public $page = 1;
 
     /**
-     * @var integer
+     * @var integer Number of rows per page
      */
     public $limit = 20;
 
     /**
-     * @var integer
+     * @var integer Offset of page
      */
     public $offset = 0;
 
     /**
-     * @var bool If is pagination in API or procedures support pagination
+     * @var bool If is pagination in API or procedure support pagination
      */
     public $manualPagination = true;
 
@@ -59,6 +60,9 @@ abstract class PaginatedProcedure extends MultiProcedure
     }
 
     /**
+     * PaginatedProcedure::manualPagination is true,
+     * it slices data by PaginatedProcedure::offset and PaginatedProcedure::limit
+     *
      * @inheritdoc
      */
     public function call()
