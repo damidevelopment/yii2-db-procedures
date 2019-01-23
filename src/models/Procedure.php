@@ -189,15 +189,4 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
 
         return implode(', ', $result);
     }
-
-    /**
-     * TODO move to better class
-     *
-     * @param  string attribute name
-     * @return void
-     */
-    public function integerFix(string $attr): void
-    {
-        $this->$attr = intval($this->$attr);
-    }
 }
