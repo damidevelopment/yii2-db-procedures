@@ -2,6 +2,8 @@
 
 namespace damidev\dbprocedures\models;
 
+use damidev\dbprocedures\models\database\IDatabaseAccessable;
+use damidev\dbprocedures\models\database\TDatabaseAccess;
 use damidev\dbprocedures\models\events\AfterCallEvent;
 use Yii;
 use yii\base\Model;
@@ -14,43 +16,19 @@ use yii\helpers\StringHelper;
  * @Author: Jakub Hrášek
  * @Date:   2018-06-13 18:02:19
  */
-abstract class Procedure extends Model implements ProcedureInterface
+abstract class Procedure extends Model implements ProcedureInterface, IDatabaseAccessable
 {
+    use TDatabaseAccess;
+
     const EVENT_BEFORE_CALL = 'beforeCall';
     const EVENT_AFTER_CALL = 'afterCall';
 
     const SCENARIO_CALL = 'procedureCall';
 
     /**
-     * @var Connection
-     */
-    private $_db;
-
-    /**
      * @var IExecutor
      */
     private $_executor;
-
-    /**
-     * @param Connection
-     * @return self
-     */
-    public function setDb(Connection $db): self
-    {
-        $this->_db = $db;
-        return $this;
-    }
-
-    /**
-     * @return Connection
-     */
-    public function getDb(): Connection
-    {
-        if ($this->_db === null) {
-            $this->_db = Yii::$app->getDb();
-        }
-        return $this->_db;
-    }
 
     /**
      * @param IExecutor $executor
