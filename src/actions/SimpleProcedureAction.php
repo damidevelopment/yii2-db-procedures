@@ -1,8 +1,4 @@
 <?php
-/**
- * @Author: Martin Štěpánek
- * @Date: 03/07/2018 12:55
- */
 
 namespace damidev\dbprocedures\actions;
 
@@ -11,12 +7,21 @@ use damidev\dbprocedures\models\Resource;
 use yii\base\Model;
 use yii\web\NotFoundHttpException;
 
+/**
+ * SimpleProcedureAction provides easy way to call procedure with input (GET or POST)
+ * and return Resource containing data from procedure.
+ *
+ * Class SimpleProcedureAction
+ * @package damidev\dbprocedures\actions
+ * @Author: Martin Štěpánek
+ * @Date: 03/07/2018 12:55
+ */
 class SimpleProcedureAction extends ProcedureAction
 {
     /**
      * @inheritdoc
      *
-     * @return Resource
+     * @return Resource Resource containing data from procedure
      */
     public function run()
     {
@@ -36,8 +41,9 @@ class SimpleProcedureAction extends ProcedureAction
     }
 
     /**
-     * @param array $data
-     * @return Resource
+     * Create resource from SimpleProcedureAction::resourceClass and load data
+     * @param array $data Data to load to resource
+     * @return Resource Final loaded resource
      */
     protected function createResource(array $data): Resource
     {
