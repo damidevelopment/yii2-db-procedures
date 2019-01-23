@@ -6,7 +6,7 @@
  * Time: 10:50 AM
  */
 
-namespace damidev\dbprocedures\models;
+namespace damidev\dbprocedures\models\executors;
 
 use yii\base\Model;
 use yii\db\Connection;

@@ -6,7 +6,7 @@
  * Time: 10:51 AM
  */
 
-namespace damidev\dbprocedures\models;
+namespace damidev\dbprocedures\models\executors;
 
 
 interface IExecutor
