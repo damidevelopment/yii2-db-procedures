@@ -3,8 +3,10 @@
 namespace damidev\dbprocedures\models;
 
 /**
- * @Author: Jakub Hrášek
- * @Date:   2018-06-18 17:33:48
+ * Interface IProcedure
+ * @author Jakub Hrášek
+ * @date 2018-06-18 17:33:48
+ * @package damidev\dbprocedures\models
  */
 interface IProcedure
 {
@@ -12,7 +14,7 @@ interface IProcedure
     /**
      * Execute procedure
      *
-     * @return mixed
+     * @return mixed Data payload
      */
     public function call();
 
