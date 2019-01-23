@@ -26,6 +26,10 @@ abstract class Procedure extends Model implements ProcedureInterface
      */
     private $_db;
 
+    /**
+     * @var IExecutor
+     */
+    private $_executor;
 
     /**
      * @param Connection
@@ -46,6 +50,30 @@ abstract class Procedure extends Model implements ProcedureInterface
             $this->_db = Yii::$app->getDb();
         }
         return $this->_db;
+    }
+
+    /**
+     * @param IExecutor $executor
+     * @return Procedure
+     */
+    public function setExecutor(IExecutor $executor): self
+    {
+        $this->_executor = $executor;
+        return $this;
+    }
+
+    /**
+     * @return IExecutor
+     */
+    public function getExecutor(): IExecutor
+    {
+        if($this->_executor === null){
+            $this->_executor = Yii::createObject([
+                'class' => ProcedureExecutor::class,
+                'db' => $this->getDb()
+            ]);
+        }
+        return $this->_executor;
     }
 
     /**
@@ -139,13 +167,7 @@ abstract class Procedure extends Model implements ProcedureInterface
         $cmd = $this->getCommand(['procedure' => $procName]) . ' ' . $this->buildInputParams($params);
         Yii::trace($cmd, __METHOD__);
 
-        $command = $this->getDb()->createCommand($cmd);
-
-        // bind params
-        foreach ($params as $attr => $value) {
-            $command->bindValue(':' . $attr, $value);
-        }
-        $result = call_user_func([$command, $method]);
+        $result = $this->getExecutor()->execute($cmd, $params, $method);
 
         Yii::trace(print_r($result, true), __METHOD__);
         return $result;
