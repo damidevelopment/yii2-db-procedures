@@ -12,9 +12,9 @@ use yii\web\NotFoundHttpException;
  * and return Resource containing data from procedure.
  *
  * Class SimpleProcedureAction
+ * @author: Martin Štěpánek
+ * @date: 03/07/2018 12:55
  * @package damidev\dbprocedures\actions
- * @Author: Martin Štěpánek
- * @Date: 03/07/2018 12:55
  */
 class SimpleProcedureAction extends ProcedureAction
 {

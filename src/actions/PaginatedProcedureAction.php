@@ -12,9 +12,9 @@ use Yii;
  * and return ProcedureDataProvider containing data from procedure.
  *
  * Class PaginatedProcedureAction
+ * @author: Jakub Hrášek
+ * @date:   2018-07-02 07:41:30
  * @package damidev\dbprocedures\actions
- * @Author: Jakub Hrášek
- * @Date:   2018-07-02 07:41:30
  */
 class PaginatedProcedureAction extends ProcedureAction
 {

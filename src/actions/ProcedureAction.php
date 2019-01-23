@@ -11,9 +11,9 @@ use yii\base\Action;
  * ProcedureAction is base abstract class for every procedure action providing easy configuration.
  *
  * Class ProcedureAction
+ * @author: Martin Štěpánek
+ * @date: 03/07/2018 12:56
  * @package damidev\dbprocedures\actions
- * @Author: Martin Štěpánek
- * @Date: 03/07/2018 12:56
  */
 abstract class ProcedureAction extends Action
 {
