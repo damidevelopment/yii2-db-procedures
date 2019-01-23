@@ -8,10 +8,11 @@ use yii\base\InvalidArgumentException;
 use yii\data\DataProviderInterface;
 use yii\data\Pagination;
 
-
 /**
- * @Author: Jakub Hrášek
- * @Date:   2018-06-28 15:28:39
+ * Class ProcedureDataProvider
+ * @author Jakub Hrášek
+ * @date 2018-06-28 15:28:39
+ * @package damidev\dbprocedures\models
  */
 class ProcedureDataProvider extends Component implements DataProviderInterface
 {
@@ -24,7 +25,7 @@ class ProcedureDataProvider extends Component implements DataProviderInterface
     public $key;
 
     /**
-     * @var array
+     * @var array Resources from procedure
      */
     private $_models;
 
@@ -34,17 +35,17 @@ class ProcedureDataProvider extends Component implements DataProviderInterface
     private $_keys;
 
     /**
-     * @var integer
+     * @var integer Total count of rows
      */
     private $_totalCount;
 
     /**
-     * @var false|Pagination
+     * @var false|Pagination Pagination object
      */
     private $_pagination;
 
     /**
-     * @var false|Pagination
+     * @var IProcedure Instance of procedure
      */
     private $_procedure;
 
@@ -208,7 +209,7 @@ class ProcedureDataProvider extends Component implements DataProviderInterface
     }
 
     /**
-     * @return Sort the sorting object. If this is false, it means the sorting is disabled.
+     * @return bool Sort the sorting object. If this is false, it means the sorting is disabled.
      */
     public function getSort()
     {
