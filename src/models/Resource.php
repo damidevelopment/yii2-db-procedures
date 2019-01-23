@@ -22,17 +22,5 @@ class Resource extends Model
             [$this->attributes(), 'safe']
         ];
     }
-
-    // TODO: move formatters to its own helper class
-
-    /**
-     * @param  mixed $dateValue
-     * @return string formatted date
-     */
-    protected static function formatDate($dateValue)
-    {
-        return $dateValue instanceof \DateTimeInterface
-            ? $dateValue->format('Y-m-d H:i:s')
-            : $dateValue;
-    }
+    
 }
