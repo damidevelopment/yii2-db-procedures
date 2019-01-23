@@ -1,15 +1,19 @@
 <?php
-/**
- * @Author: Martin Štěpánek
- * @Date: 11/07/2018 11:52
- */
 
 namespace damidev\dbprocedures\models;
 
-
+/**
+ * Class MultiProcedure
+ * @author Martin Štěpánek
+ * @date 07/11/18 11:52 AM
+ * @package damidev\dbprocedures\models
+ */
 class MultiProcedure extends Procedure
 {
 
+    /**
+     * Scenario that is set up when Procedure::callCount()
+     */
     const SCENARIO_COUNT = 'procedureCount';
 
     /**
@@ -18,17 +22,19 @@ class MultiProcedure extends Procedure
     private $_data;
 
     /**
-     * @var array Filter after call
+     * @var array Filter that is applied after call
      */
     public $filter = [];
 
     /**
-     * @var callable
+     * @var \Closure Transform data from MultiProcedure::callCount()
+     * The anonymous function signature should be: `function($result): int`.
      */
     public $transformCountResult;
 
     /**
-     * @return array Data from procedure
+     * Returns data from procedure and applies filter
+     * @return array Filtered data from procedure
      */
     protected function getAllData()
     {
@@ -41,9 +47,11 @@ class MultiProcedure extends Procedure
         return $this->_data;
     }
 
-    /** Apply filter after call
-     * @param array $data
-     * @return array
+    /**
+     * Applies filter after call
+     *
+     * @param array $data Data payload from procedure
+     * @return array Filtered data
      */
     private function applyFilter(array $data): array
     {
@@ -59,8 +67,9 @@ class MultiProcedure extends Procedure
     }
 
     /**
-     * Get procedure name
-     * @return string Name of procedure
+     * Get procedure name that returns count of rows
+     *
+     * @return string Name of procedure that returns count of rows
      */
     public static function procedureCountName(): string
     {
@@ -77,7 +86,11 @@ class MultiProcedure extends Procedure
     }
 
     /**
-     * @inheritdoc
+     * Returns rows count of procedure data.
+     * If is configured, it calls procedure that returns count,
+     * otherwise it call count on MultiProcedure::getAllData()
+     *
+     * @return int Rows count
      */
     public function callCount(): int
     {
@@ -101,7 +114,7 @@ class MultiProcedure extends Procedure
 
 
     /**
-     * Refresh procedure data
+     * Refreshes procedure data
      */
     public function refresh(): void
     {
