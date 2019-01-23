@@ -4,10 +4,11 @@ namespace damidev\dbprocedures\models;
 
 use yii\base\Model;
 
-
 /**
- * @Author: Jakub Hrášek
- * @Date:   2018-06-21 13:49:54
+ * Class Resource
+ * @author Jakub Hrášek
+ * @date 2018-06-21 13:49:54
+ * @package damidev\dbprocedures\models
  */
 class Resource extends Model
 {
