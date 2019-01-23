@@ -16,7 +16,7 @@ class AfterCallEvent extends Event
 {
 
     /**
-     * @var mixed
+     * @var mixed Data payload
      */
     public $result;
 

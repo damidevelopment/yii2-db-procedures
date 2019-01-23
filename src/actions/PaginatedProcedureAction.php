@@ -47,8 +47,8 @@ class PaginatedProcedureAction extends ProcedureAction
      * @inheritdoc
      *
      * @return PaginatedProcedure|ProcedureDataProvider
-     * In case of error, is returned procedure with errors,
-     * otherwise is returned ProcedureDataProvider containing data
+     * In case of error, returns procedure with errors,
+     * otherwise returns ProcedureDataProvider containing data
      */
     public function run()
     {

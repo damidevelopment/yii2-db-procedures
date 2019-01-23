@@ -41,7 +41,7 @@ class SimpleProcedureAction extends ProcedureAction
     }
 
     /**
-     * Create resource from SimpleProcedureAction::resourceClass and load data
+     * Creates resource from SimpleProcedureAction::resourceClass and loads data
      * @param array $data Data to load to resource
      * @return Resource Final loaded resource
      */

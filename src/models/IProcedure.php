@@ -12,7 +12,7 @@ interface IProcedure
 {
 
     /**
-     * Execute procedure
+     * Executes procedure
      *
      * @return mixed Data payload
      */

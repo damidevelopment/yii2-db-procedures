@@ -18,7 +18,7 @@ class ProcedureExecutor extends Model implements IExecutor, IDatabaseAccessable
     use TDatabaseAccess;
 
     /**
-     * Execute command on configured database
+     * Executes command on configured database
      * @param string $cmd Command to execute
      * @param array $params Params to command
      * @param string $method Method that should be executed on command (queryOne, queryAll, etc.)

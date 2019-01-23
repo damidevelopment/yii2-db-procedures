@@ -12,7 +12,7 @@ interface IExecutor
 {
 
     /**
-     * Execute command
+     * Executes command
      * @param string $cmd Command to execute
      * @param array $params Params to command
      * @param string $method Method that should be executed on command (queryOne, queryAll, etc.)
