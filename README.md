@@ -40,9 +40,9 @@ When `Procedure::callCount()` is invoked
 
 ```
 -> callCount()
--> set scenario to Procedure::PROCEDURE_COUNT
--> db count procedure exec
--> set scenario to previous one
+    -> set scenario to Procedure::PROCEDURE_COUNT
+    -> db count procedure exec
+    -> set scenario to previous one
 <- $count
 ```
 
