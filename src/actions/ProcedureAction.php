@@ -7,7 +7,7 @@
 namespace damidev\dbprocedures\actions;
 
 
-use damidev\dbprocedures\models\ProcedureInterface;
+use damidev\dbprocedures\models\IProcedure;
 use Yii;
 use yii\base\Action;
 
@@ -15,7 +15,7 @@ abstract class ProcedureAction extends Action
 {
 
     /**
-     * String representing procedure class name. Instantiated object must implement PaginatedProcedure.
+     * String representing procedure class name. Instantiated object must implement IProcedure.
      *
      * @var string
      */
@@ -36,7 +36,7 @@ abstract class ProcedureAction extends Action
     public $input;
 
     /**
-     * @var ProcedureInterface
+     * @var IProcedure
      */
     protected $procedure;
 
@@ -51,7 +51,7 @@ abstract class ProcedureAction extends Action
         $class = $this->procedureClass;
         $this->procedure = new $class;
 
-        if (!$this->procedure instanceof ProcedureInterface) {
+        if (!$this->procedure instanceof IProcedure) {
             throw new \InvalidArgumentException('Procedure must implement app\\models\\ProcedureInterface');
         }
     }

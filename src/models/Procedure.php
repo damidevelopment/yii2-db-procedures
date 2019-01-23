@@ -18,7 +18,7 @@ use yii\helpers\StringHelper;
  * @Author: Jakub Hrášek
  * @Date:   2018-06-13 18:02:19
  */
-abstract class Procedure extends Model implements ProcedureInterface, IDatabaseAccessable
+abstract class Procedure extends Model implements IProcedure, IDatabaseAccessable
 {
     use TDatabaseAccess;
 

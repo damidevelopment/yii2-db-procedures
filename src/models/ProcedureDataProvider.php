@@ -55,18 +55,18 @@ class ProcedureDataProvider extends Component implements DataProviderInterface
 
 
     /**
-     * @return ProcedureInterface
+     * @return IProcedure
      */
-    public function getProcedure(): ProcedureInterface
+    public function getProcedure(): IProcedure
     {
         return $this->_procedure;
     }
 
     /**
-     * @param ProcedureInterface
+     * @param IProcedure
      * @return self
      */
-    public function setProcedure(ProcedureInterface $procedure): self
+    public function setProcedure(IProcedure $procedure): self
     {
         $this->_procedure = $procedure;
         return $this;
