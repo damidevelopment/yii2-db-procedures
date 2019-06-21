@@ -10,7 +10,7 @@ use yii\db\Connection;
  * Interface IDatabaseAccessable
  * @author Martin Štěpánek
  * @date 1/23/19 11:51 AM
- * @package damidev\dbprocedures\models\database
+ * @package damidevelopment\dbprocedures\models\database
  */
 interface IDatabaseAccessable
 {

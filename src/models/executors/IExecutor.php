@@ -6,7 +6,7 @@ namespace damidevelopment\dbprocedures\models\executors;
  * Interface IExecutor
  * @author Martin Štěpánek
  * @date 1/23/19 10:51 AM
- * @package damidev\dbprocedures\models\executors
+ * @package damidevelopment\dbprocedures\models\executors
  */
 interface IExecutor
 {

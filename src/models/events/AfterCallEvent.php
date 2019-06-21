@@ -10,7 +10,7 @@ use yii\base\Event;
  * Class AfterCallEvent
  * @author Jakub Hrášek
  * @date 2018-06-28 19:34:46
- * @package damidev\dbprocedures\models\events
+ * @package damidevelopment\dbprocedures\models\events
  */
 class AfterCallEvent extends Event
 {

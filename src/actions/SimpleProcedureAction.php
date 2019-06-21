@@ -14,7 +14,7 @@ use yii\web\NotFoundHttpException;
  * Class SimpleProcedureAction
  * @author: Martin Štěpánek
  * @date: 03/07/2018 12:55
- * @package damidev\dbprocedures\actions
+ * @package damidevelopment\dbprocedures\actions
  */
 class SimpleProcedureAction extends ProcedureAction
 {

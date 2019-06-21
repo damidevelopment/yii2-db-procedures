@@ -18,7 +18,7 @@ use yii\helpers\StringHelper;
  * Class Procedure
  * @author Jakub Hrášek
  * @date 2018-06-13 18:02:19
- * @package damidev\dbprocedures\models
+ * @package damidevelopment\dbprocedures\models
  */
 abstract class Procedure extends Model implements IProcedure, IDatabaseAccessable
 {

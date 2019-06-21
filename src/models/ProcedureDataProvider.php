@@ -12,7 +12,7 @@ use yii\data\Pagination;
  * Class ProcedureDataProvider
  * @author Jakub Hrášek
  * @date 2018-06-28 15:28:39
- * @package damidev\dbprocedures\models
+ * @package damidevelopment\dbprocedures\models
  */
 class ProcedureDataProvider extends Component implements DataProviderInterface
 {

@@ -11,7 +11,7 @@ use damidevelopment\dbprocedures\models\database\TDatabaseAccess;
  * Class ProcedureExecutor
  * @author Martin Štěpánek
  * @date 1/23/19 10:50 PM
- * @package damidev\dbprocedures\models\executors
+ * @package damidevelopment\dbprocedures\models\executors
  */
 class ProcedureExecutor extends Model implements IExecutor, IDatabaseAccessable
 {

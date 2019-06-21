@@ -6,7 +6,7 @@ namespace damidevelopment\dbprocedures\models;
  * Class SimpleProcedure
  * @author Martin Štěpánek
  * @date 7/3/18 13:13 PM
- * @package damidev\dbprocedures\models
+ * @package damidevelopment\dbprocedures\models
  */
 class SimpleProcedure extends Procedure
 {

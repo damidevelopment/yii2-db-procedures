@@ -13,7 +13,7 @@ use yii\base\Action;
  * Class ProcedureAction
  * @author: Martin Štěpánek
  * @date: 03/07/2018 12:56
- * @package damidev\dbprocedures\actions
+ * @package damidevelopment\dbprocedures\actions
  */
 abstract class ProcedureAction extends Action
 {

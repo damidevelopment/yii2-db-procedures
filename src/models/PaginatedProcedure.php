@@ -8,7 +8,7 @@ use Yii;
  * Class PaginatedProcedure
  * @author Martin Štěpánek
  * @date 7/3/18 10:06 PM
- * @package damidev\dbprocedures\models
+ * @package damidevelopment\dbprocedures\models
  */
 abstract class PaginatedProcedure extends MultiProcedure
 {

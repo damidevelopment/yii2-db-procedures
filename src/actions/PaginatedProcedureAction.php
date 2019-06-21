@@ -14,7 +14,7 @@ use Yii;
  * Class PaginatedProcedureAction
  * @author: Jakub Hrášek
  * @date:   2018-07-02 07:41:30
- * @package damidev\dbprocedures\actions
+ * @package damidevelopment\dbprocedures\actions
  */
 class PaginatedProcedureAction extends ProcedureAction
 {

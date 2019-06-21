@@ -6,7 +6,7 @@ namespace damidevelopment\dbprocedures\models;
  * Class MultiProcedure
  * @author Martin Štěpánek
  * @date 07/11/18 11:52 AM
- * @package damidev\dbprocedures\models
+ * @package damidevelopment\dbprocedures\models
  */
 class MultiProcedure extends Procedure
 {

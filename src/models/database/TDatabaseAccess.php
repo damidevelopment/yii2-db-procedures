@@ -8,7 +8,7 @@ use yii\db\Connection;
  * Trait TDatabaseAccess
  * @author Martin Štěpánek
  * @date 1/23/19 11:51 AM
- * @package damidev\dbprocedures\models\database
+ * @package damidevelopment\dbprocedures\models\database
  */
 trait TDatabaseAccess
 {
