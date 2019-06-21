@@ -1,6 +1,6 @@
 <?php
 
-namespace damidev\dbprocedures\models\events;
+namespace damidevelopment\dbprocedures\models\events;
 
 use yii\base\Event;
 

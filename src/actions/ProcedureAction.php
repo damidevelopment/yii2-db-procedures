@@ -3,7 +3,7 @@
 namespace damidev\dbprocedures\actions;
 
 
-use damidev\dbprocedures\models\IProcedure;
+use damidevelopment\dbprocedures\models\IProcedure;
 use Yii;
 use yii\base\Action;
 

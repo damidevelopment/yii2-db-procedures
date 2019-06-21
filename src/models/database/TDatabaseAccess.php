@@ -1,6 +1,6 @@
 <?php
 
-namespace damidev\dbprocedures\models\database;
+namespace damidevelopment\dbprocedures\models\database;
 
 use yii\db\Connection;
 

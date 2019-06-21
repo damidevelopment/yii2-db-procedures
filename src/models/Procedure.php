@@ -1,12 +1,12 @@
 <?php
 
-namespace damidev\dbprocedures\models;
+namespace damidevelopment\dbprocedures\models;
 
-use damidev\dbprocedures\models\database\IDatabaseAccessable;
-use damidev\dbprocedures\models\database\TDatabaseAccess;
-use damidev\dbprocedures\models\events\AfterCallEvent;
-use damidev\dbprocedures\models\executors\IExecutor;
-use damidev\dbprocedures\models\executors\ProcedureExecutor;
+use damidevelopment\dbprocedures\models\database\IDatabaseAccessable;
+use damidevelopment\dbprocedures\models\database\TDatabaseAccess;
+use damidevelopment\dbprocedures\models\events\AfterCallEvent;
+use damidevelopment\dbprocedures\models\executors\IExecutor;
+use damidevelopment\dbprocedures\models\executors\ProcedureExecutor;
 use Yii;
 use yii\base\Model;
 use yii\base\ModelEvent;

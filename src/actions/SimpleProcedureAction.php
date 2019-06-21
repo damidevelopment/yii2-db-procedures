@@ -3,7 +3,7 @@
 namespace damidev\dbprocedures\actions;
 
 
-use damidev\dbprocedures\models\Resource;
+use damidevelopment\dbprocedures\models\Resource;
 use yii\base\Model;
 use yii\web\NotFoundHttpException;
 

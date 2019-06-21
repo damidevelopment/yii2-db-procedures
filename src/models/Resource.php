@@ -1,6 +1,6 @@
 <?php
 
-namespace damidev\dbprocedures\models;
+namespace damidevelopment\dbprocedures\models;
 
 use yii\base\Model;
 

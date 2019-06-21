@@ -1,6 +1,6 @@
 <?php
 
-namespace damidev\dbprocedures\models\executors;
+namespace damidevelopment\dbprocedures\models\executors;
 
 /**
  * Interface IExecutor

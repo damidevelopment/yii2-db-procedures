@@ -1,11 +1,11 @@
 <?php
 
-namespace damidev\dbprocedures\models\executors;
+namespace damidevelopment\dbprocedures\models\executors;
 
 use yii\base\Model;
 use yii\db\Connection;
-use damidev\dbprocedures\models\database\IDatabaseAccessable;
-use damidev\dbprocedures\models\database\TDatabaseAccess;
+use damidevelopment\dbprocedures\models\database\IDatabaseAccessable;
+use damidevelopment\dbprocedures\models\database\TDatabaseAccess;
 
 /**
  * Class ProcedureExecutor
