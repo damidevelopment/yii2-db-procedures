@@ -3,6 +3,7 @@
 namespace damidevelopment\dbprocedures\models\database;
 
 use yii\db\Connection;
+use Yii;
 
 /**
  * Trait TDatabaseAccess
