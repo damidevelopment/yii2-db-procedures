@@ -23,7 +23,7 @@ trait TDatabaseAccess
      * @param Connection Yii database connection
      * @return self
      */
-    public function setDb(Connection $db): self
+    public function setDb(Connection $db): IDatabaseAccessable
     {
         $this->_db = $db;
         return $this;
