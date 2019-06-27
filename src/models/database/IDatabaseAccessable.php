@@ -20,7 +20,7 @@ interface IDatabaseAccessable
      * @param Connection $db Yii database connection
      * @return IDatabaseAccessable
      */
-    public function setDb(Connection $db): self;
+    public function setDb(Connection $db): IDatabaseAccessable;
 
     /**
      * Returns Yii database connection
