@@ -61,7 +61,7 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
      */
     public function getExecutor(): IExecutor
     {
-        if($this->_executor === null){
+        if ($this->_executor === null) {
             $this->_executor = Yii::createObject([
                 'class' => ProcedureExecutor::class,
                 'db' => $this->getDb()
@@ -124,8 +124,6 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
         Yii::trace(print_r($safeAttrs, true), __METHOD__);
         $result = $this->executeInternal(static::procedureName(), $method, $this->getAttributes($safeAttrs));
 
-        Yii::trace(print_r($result, true), __METHOD__);
-
         $this->setScenario($oldScenario);
         return $this->afterCall($result);
     }
@@ -136,6 +134,22 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
     protected function getCommandTemplate(): string
     {
         return 'SET NOCOUNT ON; EXECUTE [dbo].[{procedure}]';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getBeforeCommand(): string
+    {
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAfterCommand(): string
+    {
+        return '';
     }
 
     /**
@@ -165,7 +179,7 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
      */
     protected function executeInternal(string $procName, string $method, array $params = [])
     {
-        $cmd = $this->getCommand(['procedure' => $procName]) . ' ' . $this->buildInputParams($params);
+        $cmd = $this->getBeforeCommand() . $this->getCommand(['procedure' => $procName]) . ' ' . $this->buildInputParams($params) . $this->getAfterCommand();
         Yii::trace($cmd, __METHOD__);
 
         $result = $this->getExecutor()->execute($cmd, $params, $method);
