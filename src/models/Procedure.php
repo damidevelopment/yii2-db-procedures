@@ -179,7 +179,7 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
      */
     protected function executeInternal(string $procName, string $method, array $params = [])
     {
-        $cmd = $this->getBeforeCommand() . $this->getCommand(['procedure' => $procName]) . ' ' . $this->buildInputParams($params) . $this->getAfterCommand();
+        $cmd = $this->getBeforeCommand() . $this->getCommand(['procedure' => $procName]) . ' ' . $this->buildInputParams($params) . ';' . $this->getAfterCommand();
         Yii::trace($cmd, __METHOD__);
 
         $result = $this->getExecutor()->execute($cmd, $params, $method);
