@@ -61,7 +61,7 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
      */
     public function getExecutor(): IExecutor
     {
-        if($this->_executor === null){
+        if ($this->_executor === null) {
             $this->_executor = Yii::createObject([
                 'class' => ProcedureExecutor::class,
                 'db' => $this->getDb()
@@ -137,6 +137,22 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
     }
 
     /**
+     * @return string
+     */
+    protected function getBeforeCommand(): string
+    {
+        return '';
+    }
+
+    /**
+     * @return string
+     */
+    protected function getAfterCommand(): string
+    {
+        return '';
+    }
+
+    /**
      * Get command based on template
      * @see Procedure::getCommandTemplate()
      * @param array $params Params to command
@@ -163,7 +179,7 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
      */
     protected function executeInternal(string $procName, string $method, array $params = [])
     {
-        $cmd = $this->getCommand(['procedure' => $procName]) . ' ' . $this->buildInputParams($params);
+        $cmd = $this->getBeforeCommand() . $this->getCommand(['procedure' => $procName]) . ' ' . $this->buildInputParams($params) . $this->getAfterCommand();
         Yii::trace($cmd, __METHOD__);
 
         $result = $this->getExecutor()->execute($cmd, $params, $method);
