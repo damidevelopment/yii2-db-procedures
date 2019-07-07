@@ -73,7 +73,10 @@ abstract class ProcedureAction extends Action
         $request = Yii::$app->getRequest();
         if ($this->input) {
             $input = call_user_func($this->input);
-            $input['page'] = $request->get('page');
+            $page = $request->get('page');
+            if ($page) {
+                $input['page'] = $page;
+            }
             return $input;
         }
 
