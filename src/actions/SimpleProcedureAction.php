@@ -39,7 +39,7 @@ class SimpleProcedureAction extends ProcedureAction
         }
 
         if(!$this->resourceClass){
-            Yii::$app->request->statusCode = 204;
+            Yii::$app->response->statusCode = 204;
             return;
         }
 
