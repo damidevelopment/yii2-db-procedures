@@ -6,6 +6,7 @@ namespace damidev\dbprocedures\actions;
 use damidevelopment\dbprocedures\models\Resource;
 use yii\base\Model;
 use yii\web\NotFoundHttpException;
+use Yii;
 
 /**
  * SimpleProcedureAction provides easy way to call procedure with input (GET or POST)
@@ -25,7 +26,7 @@ class SimpleProcedureAction extends ProcedureAction
      */
     public function run()
     {
-        $this->procedure->load($this->getInput(), '');
+        $this->procedure->setAttributes($this->getInput());
 
         if (!$this->procedure->validate()) {
             return $this->procedure;
@@ -35,6 +36,11 @@ class SimpleProcedureAction extends ProcedureAction
 
         if (empty($result)) {
             throw new NotFoundHttpException(\Yii::t('errors', 'Item not found'));
+        }
+
+        if(!$this->resourceClass){
+            Yii::$app->request->statusCode = 204;
+            return;
         }
 
         return $this->createResource($result);
@@ -51,7 +57,7 @@ class SimpleProcedureAction extends ProcedureAction
         if (!($resource instanceof Resource)) {
             throw new \InvalidArgumentException('Resource must be instance of damidev\\dbprocedures\\models\\Resource.');
         }
-        $resource->load($data, '');
+        $resource->setAttributes($data);
         return $resource;
     }
 }
