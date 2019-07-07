@@ -1,6 +1,6 @@
 <?php
 
-namespace damidev\dbprocedures\actions;
+namespace damidevelopment\dbprocedures\actions;
 
 
 use damidevelopment\dbprocedures\models\IProcedure;
