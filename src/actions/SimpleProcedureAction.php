@@ -19,6 +19,12 @@ use Yii;
  */
 class SimpleProcedureAction extends ProcedureAction
 {
+
+    /**
+     * @var string
+     */
+    public $notFoundMessage = 'Item not found';
+
     /**
      * @inheritdoc
      *
@@ -35,7 +41,7 @@ class SimpleProcedureAction extends ProcedureAction
         $result = $this->procedure->call();
 
         if (empty($result)) {
-            throw new NotFoundHttpException(\Yii::t('errors', 'Item not found'));
+            throw new NotFoundHttpException(\Yii::t('errors', $this->notFoundMessage));
         }
 
         if(!$this->resourceClass){
