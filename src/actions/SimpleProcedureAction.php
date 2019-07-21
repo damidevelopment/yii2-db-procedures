@@ -40,13 +40,13 @@ class SimpleProcedureAction extends ProcedureAction
 
         $result = $this->procedure->call();
 
-        if (empty($result)) {
-            throw new NotFoundHttpException(\Yii::t('errors', $this->notFoundMessage));
-        }
-
         if(!$this->resourceClass){
             Yii::$app->response->statusCode = 204;
             return;
+        }
+
+        if (empty($result)) {
+            throw new NotFoundHttpException(\Yii::t('errors', $this->notFoundMessage));
         }
 
         return $this->createResource($result);
