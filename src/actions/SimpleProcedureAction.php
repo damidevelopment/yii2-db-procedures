@@ -41,7 +41,7 @@ class SimpleProcedureAction extends ProcedureAction
         $result = $this->procedure->call();
 
         if(!$this->resourceClass){
-            Yii::$app->response->statusCode = 204;
+            Yii::$app->response->statusCode = 200;
             return;
         }
 
