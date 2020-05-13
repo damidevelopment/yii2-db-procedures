@@ -2,6 +2,7 @@
 
 namespace damidevelopment\dbprocedures\models\executors;
 
+use damidevelopment\dbprocedures\models\params\Param;
 use yii\base\Model;
 use yii\db\Connection;
 use damidevelopment\dbprocedures\models\database\IDatabaseAccessable;
@@ -20,7 +21,7 @@ class ProcedureExecutor extends Model implements IExecutor, IDatabaseAccessable
     /**
      * Executes command on configured database
      * @param string $cmd Command to execute
-     * @param array $params Params to command
+     * @param Param[] $params Params to command
      * @param string $method Method that should be executed on command (queryOne, queryAll, etc.)
      * @return mixed Data payload
      */
@@ -29,9 +30,10 @@ class ProcedureExecutor extends Model implements IExecutor, IDatabaseAccessable
         $command = $this->getDb()->createCommand($cmd);
 
         // bind params
-        foreach ($params as $attr => $value) {
-            $command->bindValue(':' . $attr, $value);
+        foreach ($params as $param) {
+            $param->bindParam($command);
         }
+
         $result = call_user_func([$command, $method]);
         return $result;
     }

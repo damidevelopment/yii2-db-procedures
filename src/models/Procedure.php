@@ -7,10 +7,14 @@ use damidevelopment\dbprocedures\models\database\TDatabaseAccess;
 use damidevelopment\dbprocedures\models\events\AfterCallEvent;
 use damidevelopment\dbprocedures\models\executors\IExecutor;
 use damidevelopment\dbprocedures\models\executors\ProcedureExecutor;
+use damidevelopment\dbprocedures\models\params\InputOutputParam;
+use damidevelopment\dbprocedures\models\params\InputParam;
+use damidevelopment\dbprocedures\models\params\Param;
 use Yii;
 use yii\base\Model;
 use yii\base\ModelEvent;
 use yii\db\Connection;
+use yii\helpers\ArrayHelper;
 use yii\helpers\StringHelper;
 
 
@@ -45,6 +49,11 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
     private $_executor;
 
     /**
+     * @var Param[] Procedure parameters
+     */
+    private $_params;
+
+    /**
      * Sets Executor
      * @param IExecutor $executor Executor that execute command on Procedure::call()
      * @return Procedure
@@ -68,6 +77,24 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
             ]);
         }
         return $this->_executor;
+    }
+
+    /***
+     * Get output params
+     * Example:
+     * [
+     *  [
+     *     'class' => InputOutputParam::class,
+     *     'name' => 'OutputParamName'
+     *     'length' => 30,
+     *     'type' => PDO::PARAM_STR
+     *  ]
+     * ]
+     * @return array
+     */
+    public static function specialParams(): array
+    {
+        return [];
     }
 
     /**
@@ -105,6 +132,45 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
         return $event->result;
     }
 
+    /***
+     * Creates and returns parameters for the procedure
+     * Creates InputOutput param for params specified by @param null $attrs
+     * @return array|Param[]
+     * @see outputParams()
+     */
+    private function createParams($attrs = null)
+    {
+        $this->_params = [];
+        $values = $this->getAttributes($attrs);
+
+        // Join output params
+        $attrs = ArrayHelper::merge($attrs, array_keys(static::specialParams()));
+
+        foreach ($attrs as $attrName) {
+            if (array_key_exists($attrName, static::specialParams())) {
+                $param = Yii::createObject(static::specialParams()[$attrName]);
+            } else {
+                $param = new InputParam([
+                    'name' => $attrName,
+                    'value' => $values[$attrName]
+                ]);
+            }
+
+            $this->_params[$param->name] = $param;
+        }
+
+        return $this->_params;
+    }
+
+    /**
+     * @param $name
+     * @return Param|null
+     */
+    public function getParam($name)
+    {
+        return $this->_params[$name] ?? null;
+    }
+
     /**
      * Sets scenario, call events and Procedure::executeInternal()
      *
@@ -122,7 +188,7 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
 
         $safeAttrs = $this->safeAttributes();
         Yii::trace(print_r($safeAttrs, true), __METHOD__);
-        $result = $this->executeInternal(static::procedureName(), $method, $this->getAttributes($safeAttrs));
+        $result = $this->executeInternal(static::procedureName(), $method, $this->createParams($safeAttrs));
 
         $this->setScenario($oldScenario);
         return $this->afterCall($result);
@@ -174,7 +240,7 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
      *
      * @param string $procName Procedure name
      * @param string $method Method that should be executed on command (queryOne, queryAll, etc.)
-     * @param array $params Params for procedure
+     * @param Param[] $params Params for procedure
      * @return mixed Data payload
      */
     protected function executeInternal(string $procName, string $method, array $params = [])
@@ -190,15 +256,15 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
 
     /**
      * Builds SQL params for procedure
-     * @param array $params Params for procedure
+     * @param Param[] $params Params for procedure
      * @return string SQL params
      */
     protected function buildInputParams(array $params): string
     {
         $result = [];
 
-        foreach ($params as $attr => $value) {
-            $result[] = '@' . $attr . ' = :' . $attr;
+        foreach ($params as $param) {
+            $result[] = $param->formatParam();
         }
 
         return implode(', ', $result);
