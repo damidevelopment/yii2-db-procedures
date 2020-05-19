@@ -22,7 +22,11 @@ class SimpleProcedure extends Procedure
     public function call()
     {
         if ($this->_data === null) {
-            $this->_data = $this->execute('queryOne');
+            $data = $this->execute('queryAll');
+
+            if (count($data) > 0) {
+                $this->_data = $data[0];
+            }
         }
         return $this->_data;
     }
