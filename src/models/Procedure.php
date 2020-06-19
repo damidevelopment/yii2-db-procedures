@@ -188,6 +188,7 @@ abstract class Procedure extends Model implements IProcedure, IDatabaseAccessabl
 
         $safeAttrs = $this->safeAttributes();
         Yii::trace(print_r($safeAttrs, true), __METHOD__);
+        Yii::trace(print_r($this->_params, true), __METHOD__);
         $result = $this->executeInternal(static::procedureName(), $method, $this->createParams($safeAttrs));
 
         $this->setScenario($oldScenario);
